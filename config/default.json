@@ -1,4 +1,6 @@
 {
     "port": 5000,
-    "MongoUri": "mongodb+srv://lexkorn:1q2w3e4r@cluster0.prwtn.mongodb.net/app?retryWrites=true&w=majority"
+    "jwtSecret": "lex for korn",
+    "MongoUri": "mongodb+srv://lexkorn:1q2w3e4r@cluster0.prwtn.mongodb.net/app?retryWrites=true&w=majority",
+    "baseUrl": "http://localhost:5000"
 }
