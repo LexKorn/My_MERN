@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json({extended: true}));    // чтобы парсить в json
 
 app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/objects', require('./routes/objects.routes'));
 
 const PORT = config.get('port') || 5000;
 
