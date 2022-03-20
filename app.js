@@ -1,3 +1,5 @@
+require('colors');
+
 const express = require('express'),
       config = require('config'),
       mongoose = require('mongoose');
@@ -16,7 +18,7 @@ async function start() {
         await mongoose.connect(config.get('MongoUri'));
 
         app.listen(PORT, () => {
-            console.log(`Server has started on port ${PORT}`);
+            console.log(`Server has started on port ${PORT}`.bgCyan);
         })
 
     } catch(err) {
