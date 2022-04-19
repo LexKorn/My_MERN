@@ -18,10 +18,15 @@ router.post('/create', async (req, res) => {
     }
 });
 
+
 router.get('/', async (req, res) => {
     try {
         const flats = await Flat.find(req.params);
         res.json(flats);
+
+        // await Flat.find(req.params)
+        //     .sort(-req.params.date)
+        //     .then((flats) => res.status(200).json(flats));
 
     } catch(err) {
         res.status(500).json({message: 'Something went wrong...'});
@@ -38,7 +43,7 @@ router.put('/flat-update', async (req, res) => {
 
         (err, results) => {
             if (err) {
-                return res.status(422).json({message: 'Нет такой статьи'});
+                return res.status(422).json({message: 'Нет такой квартиры'});
             }
 
             return res.status(200).json(results);
@@ -46,18 +51,40 @@ router.put('/flat-update', async (req, res) => {
     )
 });
 
+
 // get flat by id
 router.get('/flat/:id', async (req, res) => {
     console.log(req.params.id);
 
-    const flat = await Flat.findOne({ _id: req.params.id});
+    const flat = await Flat.findOne({ _id: req.params.id });
 
     if (!flat) {
-        return res.status(422).json({message: 'Нет такой статьи'});
+        return res.status(422).json({message: 'Нет такой квартиры'});
     }
 
     res.status(200).json(flat);
 })
+
+
+// delete flat
+router.delete('/flat-delete/:id', async (req, res) => {
+	console.log('id', req.params.id);
+	try {
+		await Flat.findOne({ _id: req.params.id }).exec((err, result) => {
+			if (err) {
+                return res.status(422).json({ message: `Нет такой квартиры ${id}` });
+            }
+
+			result
+				.remove()
+				.then(() => res.status(200).json({ message: 'Success' }))
+				.catch((err) => console.error(err));
+		});
+        
+	} catch (e) {
+		console.error(e);
+	}
+});
 
 
 module.exports = router;

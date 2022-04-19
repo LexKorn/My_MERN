@@ -2,10 +2,12 @@ require('colors');
 
 const express = require('express'),
       config = require('config'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json({extended: true}));    // чтобы парсить в json
 
 app.use('/api/auth', require('./routes/auth.routes'));
